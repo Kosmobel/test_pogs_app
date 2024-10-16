@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VK Bridge Test</title>
+    <script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+</head>
+<body>
+    <h1>Тестирование VK Bridge</h1>
+    <button id="getUserInfo">Получить информацию о пользователе</button>
+
+    <script>
+        // Инициализация VK Bridge
+        vkBridge.send('VKWebAppInit');
+
+        document.getElementById('getUserInfo').onclick = function() {
+            vkBridge.send('VKWebAppGetUserInfo').then(_info => {
+                // Извлекаем данные о пользователе
+                const userId = _info.id;
+                const firstName = _info.first_name;
+                const lastName = _info.last_name;
+
+                // Выводим данные в алерт и консоль
+                const fullName = `${firstName} ${lastName}`;
+                console.log(`ID: ${userId}, ФИО: ${fullName}`);
+                alert(`ID: ${userId}\nФИО: ${fullName}`);
+            }).catch(error => {
+                console.error(error);
+                alert('Ошибка: ' + error.message);
+            });
+        };
+    </script>
+</body>
+</html>

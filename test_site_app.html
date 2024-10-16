@@ -16,6 +16,8 @@
 
         document.getElementById('getUserInfo').onclick = function() {
             vkBridge.send('VKWebAppGetUserInfo').then(_info => {
+
+                console.log(_info);
                 // Извлекаем данные о пользователе
                 const userId = _info.id;
                 const firstName = _info.first_name;
